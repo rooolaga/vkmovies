@@ -1,9 +1,10 @@
 import './styles/index.scss'
+import { AppRouterProvider } from "./providers/ui/AppRouterProvider";
 
 function App() {
 
   return (
-    <div>Hello</div>
+    <AppRouterProvider />
   )
 }
 
