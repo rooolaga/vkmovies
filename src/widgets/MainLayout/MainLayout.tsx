@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { Navbar, NavbarItemType } from "@/widgets/Navbar";
 import cls from './MainLayout.module.scss'
+import { MovieCard } from "@/entities/Movie/ui/MovieCard/MovieCard";
+import logo from '@/shared/assets/logo.svg'
 
 export interface MainLayoutProps {
   children?: ReactNode;
@@ -25,8 +27,14 @@ export const MainLayout = ({children}: MainLayoutProps) => {
 
       <Navbar items={navItems} />
 
-      <div>
-
+      <div className={cls.movieList}>
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
+        <MovieCard id={1} title="Яйцо со шрамом" src={logo} />
       </div>
 
       {children}
