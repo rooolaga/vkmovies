@@ -1,1 +1,2 @@
-export * from './ui/MovieCard'
+export * from './ui/MovieCard/MovieCard'
+export * from './ui/MoviesList/MoviesList'

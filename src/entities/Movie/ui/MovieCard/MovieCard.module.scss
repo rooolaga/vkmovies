@@ -11,11 +11,9 @@
 }
 
 .title {
-  padding: 0 12px;
-  height: 40px;
-  line-height: 40px;
+  padding: 12px;
   background: linear-gradient(to right, rgba(155, 205, 255, 0.06) 0%, #9bcdff09 30%, #d0e8ff00 100%);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.1rem;
   color: #fff;
@@ -27,8 +25,13 @@
 }
 
 .imgWrapper {
-  height: 340px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
 }
