@@ -1,3 +1,4 @@
+import logo from '@/shared/assets/logo.svg'
 import cls from './MovieCard.module.scss'
 
 export interface MovieCardProps {
@@ -19,7 +20,11 @@ export const MovieCard = ({
   return (
     <div className={cls.movieCard}>
       <div className={cls.imgWrapper}>
-        <img src={src} alt="rrrr" className={cls.img}/>
+        {src ? (
+          <img src={src} alt={name} className={cls.img}/>
+        ) : (
+          <img src={logo} alt={name} className={cls.noImg} />
+        )}
       </div>
       <div className={cls.info}>
         <div className={cls.title}>{name}</div>
