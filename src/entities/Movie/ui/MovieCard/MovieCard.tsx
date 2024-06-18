@@ -30,7 +30,7 @@ export const MovieCard = ({
         <div className={cls.title}>{name}</div>
         <div className={cls.description}>
           {rating}
-          {year}
+          <div>{year}</div>
         </div>
       </div>
     </div>

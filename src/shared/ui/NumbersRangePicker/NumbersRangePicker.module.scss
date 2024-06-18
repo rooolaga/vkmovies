@@ -1,6 +1,11 @@
+.items {
+  display: grid;
+  row-gap: 4px;
+  grid-template-columns: repeat(10, 1fr);
+}
+
 .item {
   height: 40px;
-  width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,16 +49,10 @@
   border-bottom-right-radius: 10px;
 }
 
-.items {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 4px;
-}
-
 .rangeDialog {
-  width: 606px;
+  width: 700px;
   position: absolute;
-  top: 0;
+  top: 55px;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgb(78 75 75);
@@ -64,7 +63,6 @@
 
 .button {
   height: 50px;
-  width: 200px;
   display: block;
   text-transform: uppercase;
   color: white;
@@ -89,7 +87,6 @@
 
 .rangeLabel {
   height: 50px;
-  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,12 +94,11 @@
 }
 
 .controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .range {
-  height: 60px;
-  width: 60px;
   padding: 0;
   margin: 0;
   position: relative;

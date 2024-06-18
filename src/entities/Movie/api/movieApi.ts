@@ -5,9 +5,10 @@ const URL = '/movie'
 
 export type GetMoviesListParams = {
   page: number,
+  year?: string | number | number[] | undefined,
 }
 
-export const getMoviesList = async ({ page }: GetMoviesListParams) => {
+export const getMoviesList = async ({ page, year }: GetMoviesListParams) => {
   const res = await baseApi.get(URL, {
     params: {
       page,
@@ -18,7 +19,8 @@ export const getMoviesList = async ({ page }: GetMoviesListParams) => {
         'year',
         'rating',
         'poster'
-      ]
+      ],
+      year: year
     },
     paramsSerializer: params => {
       return queryString.stringify(params)

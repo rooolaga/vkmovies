@@ -1,18 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import cls from './YearsRangePicker.module.scss'
+import { useRef, useState } from "react";
 import clsx from 'clsx';
+import { Button } from "@/shared/ui/Button/Button";
+import cls from './NumbersRangePicker.module.scss'
+import { useOnClickOutside } from "@/shared/hooks/useOnClickOutside";
 
-export interface YearsRangePickerProps {
+export interface NumbersRangePickerProps {
   items: number[];
+  label: string,
+  onChange: (value) => void
 }
 
-export const YearsRangePicker = ({items}: YearsRangePickerProps) => {
+export const NumbersRangePicker = ({items, onChange, label}: NumbersRangePickerProps) => {
   const [startRange, setStartRange] = useState<number | undefined>();
   const [endRange, setEndRange] = useState<number | undefined>();
   const [hoverValue, setHoverValue] = useState<number | undefined>()
   const [isStartSelection, setIsStartSelection] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const yearRangeRef = useRef<HTMLDivElement>(null);
+  const rangeRef = useRef<HTMLDivElement>(null);
 
   const handleChangeSelection = (value) => {
     if(!isStartSelection) {
@@ -38,24 +42,23 @@ export const YearsRangePicker = ({items}: YearsRangePickerProps) => {
   const handleApplyClick = () => {
     if(!endRange) setEndRange(startRange)
     setIsOpen(false);
+    onChange(`${startRange}-${endRange}`);
   }
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (yearRangeRef.current && !yearRangeRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
+  const handleClickOutside = () => {
+    setIsOpen(false);
+  }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [yearRangeRef]);
+  useOnClickOutside(rangeRef, handleClickOutside);
 
   return (
-    <div className={cls.range} ref={yearRangeRef}>
-      <button className={cls.rangeSelector} onClick={() => setIsOpen(prev=>!prev)}>Года выпуска: {startRange} - {endRange}</button>
+    <div className={cls.range} ref={rangeRef}>
+      <Button
+        className={cls.rangeSelector}
+        onClick={() => setIsOpen(prev=>!prev)}
+      >
+        {label}: {startRange} - {endRange}
+      </Button>
       {isOpen && <div className={cls.rangeDialog}>
         <div className={cls.controls}>
           <button className={cls.button} onClick={handleResetClick}>Сбросить</button>

@@ -2,11 +2,18 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { getMoviesList, GetMoviesListParams } from "@/entities/Movie/api/movieApi";
 import { MovieCardProps } from "@/entities/Movie/ui/MovieCard/MovieCard";
 
+export type FilterType = {
+  year: string | number | number[] | undefined,
+}
+
 class MovieStore {
   pages: number;
   page: 1;
   movies: MovieCardProps[] = [];
   isLoading = true;
+  filter: FilterType = {
+    year: undefined
+  }
   error = '';
 
   constructor() {
@@ -22,6 +29,7 @@ class MovieStore {
         this.isLoading = false;
         this.page = response.page;
         this.pages = response.pages;
+        this.filter.year = params.year || undefined
         this.movies = response.docs.map(item => ({
           id: item.id,
           name: item.name,
