@@ -54,7 +54,7 @@ export const NumbersRangePicker = ({items, onChange, label}: NumbersRangePickerP
   return (
     <div className={cls.range} ref={rangeRef}>
       <Button
-        className={cls.rangeSelector}
+        isActive={isOpen}
         onClick={() => setIsOpen(prev=>!prev)}
       >
         {label}: {startRange} - {endRange}

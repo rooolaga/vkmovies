@@ -1,0 +1,40 @@
+.moviePage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+}
+
+.genre {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a5e0f3;
+  margin-top: 5px;
+}
+
+.description {
+  font-size: 18px;
+}
+
+.year {
+  display: flex;
+  gap: 50px;
+  color: #959595;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.rating {
+
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.img {
+  box-shadow: 3px 3px 8px #000;
+}

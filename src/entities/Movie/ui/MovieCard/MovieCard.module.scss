@@ -1,31 +1,56 @@
 .movieCard {
-  border: 1px solid #2b2f33;
+  position: relative;
+  border: 3px solid #2b2f33;
+  border-radius: 3px;
   box-shadow: 3px 3px 8px #000;
+  width: 275px;
 }
 
 .info {
-  height: 150px;
   background: #181f24;
   font-size: 14px;
   color: #9ab0cd;
 }
 
 .title {
-  padding: 12px;
-  background: linear-gradient(to right, rgba(155, 205, 255, 0.06) 0%, #9bcdff09 30%, #d0e8ff00 100%);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  color: #fff;
-  text-transform: uppercase;
+  padding: 6px 12px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #020202, #03141b);
+  border-top: 3px solid rgb(43, 47, 51);
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .description {
-  padding: 4px 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.year, .rating {
+  box-shadow: 1px 1px 9px #2e2b2b;
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+.year {
+  background: #2c3e50;
+}
+
+.rating {
+  background: #ae822c;
 }
 
 .imgWrapper {
-  height: 400px;
+  height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,5 +62,40 @@
 }
 
 .noImg {
-  width: 80px;
+  width: 40px;
+}
+
+.controls {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  opacity: 0;
+  background-color: rgba(0,0,0,.85);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  transition: 1s;
+}
+
+.movieCard:hover .controls{
+  opacity: 1;
+}
+
+.link {
+  height: 50px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #ffffff50;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
 }

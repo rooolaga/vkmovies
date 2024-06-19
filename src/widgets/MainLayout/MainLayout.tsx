@@ -13,7 +13,7 @@ const navItems: NavbarItemType[] = [
   },
   {
     title: 'Избранное',
-    to: '/'
+    to: '/favorites'
   },
 ]
 
@@ -23,10 +23,13 @@ export const MainLayout = ({children}: MainLayoutProps) => {
   return (
     <div className={cls.mainLayout}>
 
-      <Navbar items={navItems} />
+      <header>
+        <Navbar items={navItems} />
+      </header>
 
-
-      {children}
+      <main className={cls.content}>
+        {children}
+      </main>
     </div>
   )
 }

@@ -38,7 +38,7 @@ export const MultiSelect = ({items, label}: MultiSelectProps) => {
 
   return (
     <div className={cls.multiSelect} ref={selectRef}>
-      <Button onClick={handleToggleButton}>
+      <Button onClick={handleToggleButton} isActive={isOpen}>
         {label} {values.map(item => <span key={item}>{item}</span>)}
       </Button>
       {isOpen && (
