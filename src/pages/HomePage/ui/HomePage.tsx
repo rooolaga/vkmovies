@@ -7,39 +7,57 @@ import { MultiSelect } from "@/shared/ui/MultiSelect/MultiSelect";
 import { NumbersRangePicker } from "@/shared/ui/NumbersRangePicker/NumbersRangePicker";
 import { Pagination } from "@/shared/ui/Pagination/Pagination";
 import cls from './HomePage.module.scss'
+import { HomePageSkeleton } from "@/pages/HomePage/ui/HomePageSkeleton";
+import { Button } from "@/shared/ui/Button/Button";
 
-const years = Array.from({length: 54}, (_el, index) => (index + 1970))
+const years = Array.from({length: 34}, (_el, index) => (index + 1990))
 const ratingRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export const HomePage = observer(() => {
   const {
-    movies,
     getMoviesAction,
+    getGenresAction,
+    updateFilter,
+    movies,
     error,
     isLoading,
     page,
     pages,
-    filter
+    filter,
+    genres
   } = movieStore;
 
   const handleChangePage = async (value: number) => {
     await getMoviesAction({page: value, ...filter});
   };
 
-  const handleChangeYearsPicker = async (years) => {
-    await getMoviesAction({page: 1, ...filter, year: years})
+  const handleGenresChange = (genres) => {
+    updateFilter({...filter, genres})
   }
 
-  const handleChangeRatingPicker = async (rating) => {
-    await getMoviesAction({page: 1, ...filter, rating: rating})
+  const handleChangeYearsPicker = (year) => {
+    updateFilter({...filter, year: year})
+  }
+
+  const handleChangeRatingPicker = (rating) => {
+    updateFilter({...filter, rating})
+  }
+
+  const handleChangeFilter = async () => {
+    await getMoviesAction({page: 1, ...filter})
+  }
+
+  const handleClearFilter = async () => {
+    await getMoviesAction({page: 1, year: undefined, rating: undefined, genres: []})
   }
 
   useEffect(() => {
     getMoviesAction({page: 1, ...filter});
+    getGenresAction();
   }, [])
 
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <HomePageSkeleton />;
   if (error) return <div>{error}</div>
 
   return (
@@ -47,9 +65,28 @@ export const HomePage = observer(() => {
       <div className={cls.page}>
         <h1>Фильмы</h1>
         <div className={cls.filter}>
-          <MultiSelect label='Жанр' items={['value 1', 'value 2', 'value 3']}/>
-          <NumbersRangePicker label='Года выпуска' items={years} onChange={handleChangeYearsPicker}/>
-          <NumbersRangePicker label='Рейтинг' items={ratingRange} onChange={handleChangeRatingPicker}/>
+          <Button onClick={handleClearFilter} className={cls.clear}>Очистить</Button>
+          <MultiSelect
+            label='Жанр'
+            items={genres}
+            selectedItems={filter.genres}
+            onChange={handleGenresChange}
+          />
+          <NumbersRangePicker
+            start={filter.year?.start}
+            end={filter.year?.end}
+            label='Года выпуска'
+            items={years}
+            onChange={handleChangeYearsPicker}
+          />
+          <NumbersRangePicker
+            start={filter.rating?.start}
+            end={filter.rating?.end}
+            label='Рейтинг'
+            items={ratingRange}
+            onChange={handleChangeRatingPicker}
+          />
+          <Button onClick={handleChangeFilter} className={cls.apply}>Применить</Button>
         </div>
 
         <MoviesList items={movies}/>

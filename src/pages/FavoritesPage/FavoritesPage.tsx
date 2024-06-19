@@ -4,6 +4,7 @@ import { movieStore } from "@/entities/Movie/model/movieStore";
 import { useEffect } from "react";
 import { MoviesList } from "@/entities/Movie";
 import cls from './FavoritesPage.module.scss'
+import { MovieListSkeleton } from "@/entities/Movie/ui/MoviesList/MovieListSkeleton";
 
 export const FavoritesPage = observer(() => {
   const {
@@ -16,11 +17,11 @@ export const FavoritesPage = observer(() => {
 
   useEffect(() => {
     if(favorites.length > 0) {
-      getMoviesAction({page: 1, id: favorites});
+      getMoviesAction({page: 1, id: favorites, genres: []});
     }
   }, [favorites])
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <MovieListSkeleton />;
   if (error) return <div>{error}</div>
 
   return (

@@ -22,8 +22,8 @@
 }
 
 .selectDialog {
-  width: 250px;
-  padding: 4px;
+  width: 200px;
+  padding: 10px;
   position: absolute;
   z-index: 2;
   top: 55px;
@@ -39,4 +39,9 @@
 
 .multiSelect {
   position: relative;
+}
+
+.values {
+  display: flex;
+  gap: 10px;
 }

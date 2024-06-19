@@ -3,7 +3,7 @@ export const usePagination = (page: number, count: number) => {
 
   switch (true) {
     case count <= 10:
-      for (let i = 1; i <= 10; i++) {
+      for (let i = 1; i <= count; i++) {
         res.push(i)
       }
       break;

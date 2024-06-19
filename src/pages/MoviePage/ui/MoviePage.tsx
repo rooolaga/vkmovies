@@ -16,31 +16,31 @@ export const MoviePage = observer(() => {
     }
   }, [id]);
 
-  console.log(movie)
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>
 
   return (
     <MainLayout>
-      <div className={cls.moviePage}>
-        <div className={cls.info}>
-          <h1>{movie.name}</h1>
-          <div className={cls.year}>
-            <span>Год выпуска: {movie.year}</span>
-            <span>Рейтинг: {movie.rating.kp}</span>
+      {movie && (
+        <div className={cls.moviePage}>
+          <div className={cls.info}>
+            <h1>{movie?.name}</h1>
+            <div className={cls.year}>
+              <span>Год выпуска: {movie.year}</span>
+              <span>Рейтинг: {movie.rating.kp}</span>
+            </div>
+            <div className={cls.genre}>
+              {movie.genres.map(item => (<span key={item.name}>{item.name} </span>))}
+            </div>
+            <div className={cls.description}>
+              {movie.description}
+            </div>
           </div>
-          <div className={cls.genre}>
-            {movie.genres.map(item => (<span>{item.name} </span>))}
-          </div>
-          <div className={cls.description}>
-            {movie.description}
+          <div>
+            <img src={movie.poster?.previewUrl} alt={movie.name} loading="lazy" className={cls.img}/>
           </div>
         </div>
-        <div>
-          <img src={movie.poster?.previewUrl} alt={movie.name} loading="lazy" className={cls.img}/>
-        </div>
-      </div>
+      )}
     </MainLayout>
   );
 })

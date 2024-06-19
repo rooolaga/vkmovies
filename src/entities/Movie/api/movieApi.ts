@@ -1,24 +1,31 @@
 import { baseApi } from "@/shared/api/baseApi";
 import queryString from "query-string";
 
-const SLUG = '/movie'
+const SLUG = '/v1.4/movie'
 
 export type GetMoviesListParams = {
   page: number,
-  year?: string | number | number[] | undefined
-  rating?: string | number | number[] | undefined
+  year?: {
+    start: number,
+    end: number
+  } | undefined
+  rating?: {
+    start: number,
+    end: number
+  } | undefined,
+  genres: string[]
   id?: string | number | number[] | undefined
 }
 
-export const getMoviesList = async ({ page, year, rating, id }: GetMoviesListParams) => {
-  console.log('id', id);
+export const getMoviesList = async ({ page, year, rating, genres, id }: GetMoviesListParams) => {
   const res = await baseApi.get(SLUG, {
     params: {
+      id: id,
       page,
       limit: 50,
-      year: year,
-      id: id,
-      'rating.kp': rating,
+      'genres.name': genres,
+      year: year ? `${year.start}-${year.end}` : undefined,
+      'rating.kp': rating ? `${rating.start}-${rating.end}` : undefined,
       selectFields: [
         'id',
         'name',
@@ -42,6 +49,12 @@ export const getMoviesList = async ({ page, year, rating, id }: GetMoviesListPar
 
 export const getMovieById = async (id: number) => {
   const res =  await baseApi.get(`${SLUG}/${id}`);
+
+  return res.data;
+}
+
+export const getGenres = async () => {
+  const res = await baseApi.get('/v1/movie/possible-values-by-field?field=genres.name');
 
   return res.data;
 }

@@ -7,12 +7,14 @@ import { useOnClickOutside } from "@/shared/hooks/useOnClickOutside";
 export interface NumbersRangePickerProps {
   items: number[];
   label: string,
+  start: number | undefined,
+  end: number | undefined,
   onChange: (value) => void
 }
 
-export const NumbersRangePicker = ({items, onChange, label}: NumbersRangePickerProps) => {
-  const [startRange, setStartRange] = useState<number | undefined>();
-  const [endRange, setEndRange] = useState<number | undefined>();
+export const NumbersRangePicker = ({items, onChange, label, start, end}: NumbersRangePickerProps) => {
+  const [startRange, setStartRange] = useState<number | undefined>(start);
+  const [endRange, setEndRange] = useState<number | undefined>(end);
   const [hoverValue, setHoverValue] = useState<number | undefined>()
   const [isStartSelection, setIsStartSelection] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -26,23 +28,15 @@ export const NumbersRangePicker = ({items, onChange, label}: NumbersRangePickerP
     } else {
       setIsStartSelection(false);
       setEndRange(value);
+      onChange({
+        start: startRange,
+        end: value
+      });
     }
   }
 
   const handleHover = (value) => {
     if(isStartSelection) setHoverValue(value)
-  }
-
-  const handleResetClick = () => {
-    setStartRange(undefined);
-    setEndRange(undefined);
-    setIsOpen(false);
-  }
-
-  const handleApplyClick = () => {
-    if(!endRange) setEndRange(startRange)
-    setIsOpen(false);
-    onChange(`${startRange}-${endRange}`);
   }
 
   const handleClickOutside = () => {
@@ -57,16 +51,9 @@ export const NumbersRangePicker = ({items, onChange, label}: NumbersRangePickerP
         isActive={isOpen}
         onClick={() => setIsOpen(prev=>!prev)}
       >
-        {label}: {startRange} - {endRange}
+        {label}: {startRange && endRange ? startRange + '-' + endRange : 'все'}
       </Button>
       {isOpen && <div className={cls.rangeDialog}>
-        <div className={cls.controls}>
-          <button className={cls.button} onClick={handleResetClick}>Сбросить</button>
-          <div className={cls.rangeLabel}>
-            {startRange} - {endRange}
-          </div>
-          <button className={clsx(cls.button, cls.apply)} onClick={handleApplyClick}>Применить</button>
-        </div>
         <div className={cls.items}>
           {items.map(item => (
             <div

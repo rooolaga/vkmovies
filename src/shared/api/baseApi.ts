@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from "axios";
 
 export const baseApi: AxiosInstance = axios.create({
-  baseURL: "https://api.kinopoisk.dev/v1.4",
+  baseURL: "https://api.kinopoisk.dev",
   headers: {
     "Content-Type": "application/json",
-    "X-API-KEY": "SEX017A-JVDMWZ1-QVYC5XM-Z5DBJKA"
+    "X-API-KEY": "C5RE8C0-JDF429S-Q5QQ5PP-SZFWRRZ"
   },
 });

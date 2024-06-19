@@ -51,6 +51,7 @@
 
 .rangeDialog {
   width: 700px;
+  padding: 10px;
   position: absolute;
   z-index: 2;
   top: 55px;
@@ -61,41 +62,12 @@
   box-shadow: 3px 3px 8px #000;
 }
 
-.button {
-  height: 50px;
-  display: block;
-  text-transform: uppercase;
-  color: white;
-  text-align: center;
-
-  &:hover, &:focus {
-    box-shadow: 3px 3px 8px #000;
-  }
-}
-
-.button {
-  border: none;
-  background: linear-gradient(to right, #9e5e50 0%, rgba(158, 94, 80, 0.72) 30%, rgba(158, 94, 80, 0.01) 100%);
-  cursor: pointer;
-  transition: 0.2s;
-  font-weight: 700;
-
-  &.apply {
-    background: linear-gradient(to left, #899c3f 0%, rgba(137, 156, 63, 0.72) 30%, rgba(137, 156, 63, 0.01) 100%);
-  }
-}
-
 .rangeLabel {
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-}
-
-.controls {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .range {

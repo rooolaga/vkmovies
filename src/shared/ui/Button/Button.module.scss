@@ -9,6 +9,10 @@
   font-weight: 600;
   cursor: pointer;
 
+  &:hover {
+    box-shadow: 0 0 6px #fffe;
+  }
+
   &.selected {
     background-color: #86993f;
   }
